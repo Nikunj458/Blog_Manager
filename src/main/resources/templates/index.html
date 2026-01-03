@@ -326,66 +326,224 @@
             transform: translateY(-2px);
         }
 
-             .table-wrapper {
-            background: linear-gradient(135deg, rgba(22,27,34,.8), rgba(26,31,38,.6));
-            border: 1px solid #30363d;
+        .table-wrapper {
+            background: linear-gradient(135deg, rgba(22, 27, 34, 0.8) 0%, rgba(26, 31, 38, 0.6) 100%);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(48, 54, 61, 0.8);
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 24px rgba(0,0,0,.4);
-            max-width: 1200px;
-            margin: auto;
+            box-shadow:
+                0 4px 24px rgba(0, 0, 0, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.03);
         }
 
         .table-custom {
             width: 100%;
+            margin: 0;
             border-collapse: collapse;
-            table-layout: fixed;
         }
 
         .table-custom thead {
-            background: rgba(13,17,23,.9);
+            background: rgba(13, 17, 23, 0.8);
+            border-bottom: 1px solid rgba(48, 54, 61, 0.8);
+            position: relative;
+        }
+
+        .table-custom thead::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(56, 139, 253, 0.3), transparent);
         }
 
         .table-custom thead th {
-            font-size: 0.85rem;
             color: #8b92a0;
+            font-weight: 700;
+            font-size: 0.75rem;
             text-transform: uppercase;
             letter-spacing: 1px;
             padding: 18px 24px;
             text-align: left;
-        }
-
-        .table-custom tbody td {
-            font-size: 0.85rem;
-            padding: 18px 24px;
-            color: #c9d1d9;
-            vertical-align: middle;
+            border: none;
         }
 
         .table-custom tbody tr {
-            border-bottom: 1px solid #21262d;
+            border-bottom: 1px solid rgba(33, 38, 45, 0.6);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .table-custom tbody tr::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #388bfd, #a371f7);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .table-custom tbody tr:hover::before {
+            opacity: 1;
+        }
+
+        .table-custom tbody tr:hover {
+            background: rgba(28, 33, 40, 0.6);
+            transform: translateX(4px);
         }
 
         .table-custom tbody tr:last-child {
             border-bottom: none;
         }
 
-        .table-custom tbody tr:hover {
-            background: rgba(28,33,40,.6);
+        .table-custom tbody td {
+            color: #c9d1d9;
+            padding: 18px 24px;
+            border: none;
+            vertical-align: middle;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
         }
 
-        .table-custom th:nth-child(1),
-        .table-custom td:nth-child(1) { width: 25%; }
+        .table-custom tbody td:first-child {
+            color: #e6edf3;
+            font-weight: 600;
+        }
 
-        .table-custom th:nth-child(2),
-        .table-custom td:nth-child(2) { width: 20%; }
+        /* Large Desktop (1920px and above) - 4K/QHD Displays */
+        @media (min-width: 1920px) {
+            .container {
+                max-width: 1400px;
+            }
 
-        .table-custom th:nth-child(3),
-        .table-custom td:nth-child(3) { width: 55%; }
+            .main-title {
+                font-size: 3.5rem;
+            }
 
-        @media (max-width: 768px) {
+            .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .control-panel,
+            .table-wrapper {
+                padding: 44px;
+            }
+
+            .table-custom thead th,
+            .table-custom tbody td {
+                padding: 20px 28px;
+                font-size: 1rem;
+            }
+
+            .btn-new-post {
+                padding: 14px 28px;
+                font-size: 1rem;
+            }
+        }
+
+        /* Standard Desktop (1440px - 1919px) - Large Laptop/Desktop */
+        @media (min-width: 1440px) and (max-width: 1919px) {
+            .container {
+                max-width: 1280px;
+            }
+
+            .main-title {
+                font-size: 3.25rem;
+            }
+
+            .table-custom thead th,
+            .table-custom tbody td {
+                padding: 18px 26px;
+            }
+        }
+
+        /* Medium Desktop (1200px - 1439px) - Standard Laptop */
+        @media (min-width: 1200px) and (max-width: 1439px) {
+            .container {
+                max-width: 1140px;
+            }
+
+            .main-title {
+                font-size: 3rem;
+            }
+
+            .table-custom thead th,
+            .table-custom tbody td {
+                padding: 16px 22px;
+            }
+        }
+
+        /* Small Laptop (992px - 1199px) */
+        @media (min-width: 992px) and (max-width: 1199px) {
+            .container {
+                max-width: 960px;
+            }
+
+            .main-title {
+                font-size: 2.75rem;
+            }
+
+            .control-panel {
+                padding: 32px;
+            }
+
+            .table-custom thead th,
+            .table-custom tbody td {
+                padding: 16px 20px;
+                font-size: 0.9rem;
+            }
+
             .input-group-custom {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1.2fr 0.9fr 0.9fr;
+                gap: 12px;
+            }
+        }
+
+        /* Tablet Landscape (768px - 991px) */
+        @media (min-width: 768px) and (max-width: 991px) {
+            .container {
+                max-width: 720px;
+            }
+
+            .main-title {
+                font-size: 2.5rem;
+            }
+
+            body {
+                padding: 60px 20px;
+            }
+
+            .control-panel {
+                padding: 28px;
+            }
+
+            .input-group-custom {
+                grid-template-columns: 1fr 0.75fr 0.75fr;
+                gap: 10px;
+            }
+
+            .table-custom thead th,
+            .table-custom tbody td {
+                padding: 14px 18px;
+                font-size: 0.85rem;
+            }
+
+            .btn-action {
+                padding: 10px 14px;
+                font-size: 0.85rem;
+            }
+        }
+
+        /* Tablet Portrait (600px - 767px) */
+        @media (min-width: 600px) and (max-width: 767px) {
+            .container {
+                max-width: 100%;
+                padding: 0 20px;
             }
 
             .main-title {
@@ -393,12 +551,271 @@
             }
 
             body {
+                padding: 50px 15px;
+            }
+
+            .header-section {
+                margin-bottom: 48px;
+            }
+
+            .control-panel {
+                padding: 24px;
+            }
+
+            .input-group-custom {
+                grid-template-columns: 1fr 1fr;
+                gap: 12px;
+            }
+
+            .form-group-custom {
+                grid-column: 1 / -1;
+            }
+
+            .table-wrapper {
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .table-custom {
+                min-width: 600px;
+            }
+
+            .table-custom thead th,
+            .table-custom tbody td {
+                padding: 12px 16px;
+                font-size: 0.8rem;
+            }
+        }
+
+        /* Mobile Landscape (480px - 599px) */
+        @media (min-width: 480px) and (max-width: 599px) {
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+            }
+
+            body {
                 padding: 40px 15px;
             }
 
+            .header-section {
+                margin-bottom: 40px;
+            }
 
             .control-panel {
-                padding: 28px;
+                padding: 20px;
+            }
+
+            .input-group-custom {
+                grid-template-columns: 1fr;
+                gap: 12px;
+            }
+
+            .action-bar {
+                margin-bottom: 24px;
+            }
+
+            /* Card-based layout for mobile */
+            .table-responsive-cards .table-custom thead {
+                display: none;
+            }
+
+            .table-responsive-cards .table-custom,
+            .table-responsive-cards .table-custom tbody,
+            .table-responsive-cards .table-custom tr,
+            .table-responsive-cards .table-custom td {
+                display: block;
+                width: 100%;
+            }
+
+            .table-responsive-cards .table-custom tr {
+                margin-bottom: 16px;
+                border: 1px solid rgba(48, 54, 61, 0.8);
+                border-radius: 8px;
+                padding: 16px;
+                background: rgba(13, 17, 23, 0.4);
+            }
+
+            .table-responsive-cards .table-custom tr:hover {
+                transform: translateX(0);
+            }
+
+            .table-responsive-cards .table-custom tr::before {
+                display: none;
+            }
+
+            .table-responsive-cards .table-custom td {
+                padding: 10px 0;
+                border: none;
+                text-align: left;
+                position: relative;
+                padding-left: 45%;
+                word-wrap: break-word;
+            }
+
+            .table-responsive-cards .table-custom td::before {
+                content: attr(data-label);
+                position: absolute;
+                left: 0;
+                width: 40%;
+                padding-right: 10px;
+                font-weight: 700;
+                text-transform: uppercase;
+                font-size: 0.7rem;
+                color: #8b92a0;
+                letter-spacing: 0.5px;
+            }
+
+            .table-responsive-cards .table-custom td:not(:last-child) {
+                border-bottom: 1px solid rgba(33, 38, 45, 0.4);
+                padding-bottom: 10px;
+                margin-bottom: 10px;
+            }
+        }
+
+        /* Mobile Portrait (320px - 479px) */
+        @media (max-width: 479px) {
+            .main-title {
+                font-size: 1.75rem;
+                letter-spacing: -0.5px;
+            }
+
+            .subtitle {
+                font-size: 0.85rem;
+            }
+
+            .divider {
+                width: 60px;
+                height: 3px;
+                margin-bottom: 16px;
+            }
+
+            body {
+                padding: 30px 12px;
+            }
+
+            .header-section {
+                margin-bottom: 32px;
+            }
+
+            .action-bar {
+                margin-bottom: 20px;
+            }
+
+            .control-panel {
+                padding: 18px;
+                margin-bottom: 20px;
+            }
+
+            .control-title {
+                font-size: 0.9rem;
+                margin-bottom: 20px;
+            }
+
+            .input-group-custom {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+
+            .form-label-custom {
+                font-size: 0.7rem;
+            }
+
+            .form-control-custom {
+                padding: 10px 12px;
+                font-size: 0.85rem;
+            }
+
+            .btn-action {
+                padding: 10px 14px;
+                font-size: 0.85rem;
+                gap: 6px;
+            }
+
+            .btn-new-post {
+                padding: 10px 16px;
+                font-size: 0.85rem;
+                gap: 6px;
+            }
+
+            /* Card-based layout for mobile */
+            .table-responsive-cards .table-custom thead {
+                display: none;
+            }
+
+            .table-responsive-cards .table-custom,
+            .table-responsive-cards .table-custom tbody,
+            .table-responsive-cards .table-custom tr,
+            .table-responsive-cards .table-custom td {
+                display: block;
+                width: 100%;
+            }
+
+            .table-responsive-cards .table-custom tr {
+                margin-bottom: 14px;
+                border: 1px solid rgba(48, 54, 61, 0.8);
+                border-radius: 8px;
+                padding: 14px;
+                background: rgba(13, 17, 23, 0.4);
+            }
+
+            .table-responsive-cards .table-custom tr:hover {
+                transform: translateX(0);
+                background: rgba(28, 33, 40, 0.5);
+            }
+
+            .table-responsive-cards .table-custom tr::before {
+                display: none;
+            }
+
+            .table-responsive-cards .table-custom td {
+                padding: 8px 0;
+                border: none;
+                text-align: left;
+                position: relative;
+                padding-left: 0;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+                word-wrap: break-word;
+                overflow-wrap: break-word;
+            }
+
+            .table-responsive-cards .table-custom td::before {
+                content: attr(data-label);
+                position: static;
+                width: 100%;
+                font-weight: 700;
+                text-transform: uppercase;
+                font-size: 0.65rem;
+                color: #8b92a0;
+                letter-spacing: 0.5px;
+                margin-bottom: 2px;
+            }
+
+            .table-responsive-cards .table-custom td:not(:last-child) {
+                border-bottom: 1px solid rgba(33, 38, 45, 0.4);
+                padding-bottom: 8px;
+                margin-bottom: 8px;
+            }
+        }
+
+        /* Very Small Devices (max 320px) */
+        @media (max-width: 320px) {
+            .main-title {
+                font-size: 1.5rem;
+            }
+
+            .control-panel {
+                padding: 14px;
+            }
+
+            .btn-action i,
+            .btn-new-post i {
+                display: none;
             }
         }
 
@@ -459,7 +876,7 @@
         </div>
     </div>
 
-    <div class="table-wrapper">
+    <div class="table-wrapper fade-in">
         <table class="table-custom">
             <thead>
             <tr>
@@ -470,9 +887,9 @@
             </thead>
             <tbody>
             <tr th:each="post : ${listPosts}">
-                <td th:text="${post.title}">Post Title</td>
-                <td th:text="${post.author}">Author</td>
-                <td th:text="${post.content}">Content</td>
+                <td th:text="${post.title}" data-label="Title">Post Title</td>
+                <td th:text="${post.author}" data-label="Author">Author</td>
+                <td th:text="${post.content}" data-label="Content">Content</td>
             </tr>
             </tbody>
         </table>
@@ -480,6 +897,27 @@
 </div>
 
 <script>
+    // Toggle responsive table view on mobile
+    function updateTableResponsiveness() {
+        const tableWrapper = document.querySelector('.table-wrapper');
+        const screenWidth = window.innerWidth;
+
+        // Apply card layout for mobile devices (below 600px)
+        if (screenWidth < 600) {
+            tableWrapper.classList.add('table-responsive-cards');
+        } else {
+            tableWrapper.classList.remove('table-responsive-cards');
+        }
+    }
+
+    // Run on load and resize with debounce for performance
+    let resizeTimer;
+    updateTableResponsiveness();
+    window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(updateTableResponsiveness, 100);
+    });
+
     function editPost() {
         const id = document.getElementById("postIdInput").value;
         if (id && id > 0) {
